@@ -4,6 +4,8 @@ import pandas as pd
 from time import sleep
 from typing import Optional
 from sqlitemodel import Model, Database
+import config
+
 
 Database.DB_FILE = './database.db'
 bank_name = 'promsvyazbank'
@@ -56,7 +58,7 @@ class BankRatingParser:
         self._page_rage = range(1, page_num_limit + 1)
         if results_file:
             self._results_file = results_file
-        self._rate_source_url = 'https://www.banki.ru/services/responses/bank/'
+        self._rate_source_url = config.BANKIRU_URL
         self._header_data = {'user-agent': 'Mozilla/5.1', 'accept': '*/*'}
         self._rating_item_search_data = {'item_tag': 'article', 'search_match_tags': {'class': 'responses__item'}}
         
