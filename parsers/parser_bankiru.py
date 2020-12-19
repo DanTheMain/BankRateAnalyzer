@@ -6,8 +6,7 @@ from typing import Optional
 import config
 
 
-Database.DB_FILE = './database.db'
-bank_name = 'promsvyazbank'
+config.bank_name
 
 
 class PageParser:
@@ -82,5 +81,5 @@ class BankRatingParser:
         
 
 if __name__ == "__main__":
-    brp = BankRatingParser(bank_name, 1, 'results.xlsx')
+    brp = BankRatingParser(config.bank_name, 1, 'results.xlsx')
     ratings_records = brp.get_rating_data()
