@@ -78,3 +78,9 @@ class BankRatingParser:
                 result.to_excel(self._results_file)
             
             return result
+        
+        
+
+if __name__ == "__main__":
+    brp = BankRatingParser(bank_name, 1, 'results.xlsx')
+    ratings_records = brp.get_rating_data()
