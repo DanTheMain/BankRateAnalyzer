@@ -6,7 +6,7 @@ from typing import Optional
 import config
 
 
-config.bank_name
+config.BANK_NAME
 
 
 class PageParser:
