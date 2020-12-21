@@ -4,6 +4,7 @@ from time import sleep
 from typing import Optional
 import config
 import datetime
+import csv
 
 
 class PageParser:
@@ -65,7 +66,7 @@ class BankRatingParser:
         
     def get_rating_data(self, page_parse_wait_sec: int = 0.1):
         p_parser = PageParser()
-        sp_retriever = PageSourceRetriever(header_data = self._header_data)
+        sp_retriever = PageSourceRetriever(header_data=self._header_data)
 
         result = list()
         for i in self._page_range:
@@ -79,7 +80,12 @@ class BankRatingParser:
 
 
 if __name__ == "__main__":
-    brp = BankRatingParser(config.BANK_NAME, 4)
+    brp = BankRatingParser(config.BANK_NAME, 1)
     ratings_records = brp.get_rating_data()
+    if hasattr(config, 'CSV_FILE') and ratings_records:
+        with open(str(config.CSV_FILE), "w", encoding="utf-8") as f:
+            writer = csv.DictWriter(f, fieldnames=ratings_records[0].keys())
+            writer.writeheader()
+            writer.writerows(ratings_records)
     print(len(ratings_records))
     [print(record) for record in list(ratings_records)]
